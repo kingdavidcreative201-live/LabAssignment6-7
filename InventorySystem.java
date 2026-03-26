@@ -250,3 +250,75 @@ public class InventorySystem {
             System.out.printf("Subtotal Sales: %35.2f%n", subTotal);
         }
     }
+        // Requirement 9: Sort by name using bubble sort with index array
+    public static void sortByNameReport(String[] pn, double[] pp, int[] pq) {
+        // Create index array
+        int[] index = new int[pn.length];
+        for (int i = 0; i < index.length; i++) {
+            index[i] = i;
+        }
+        
+        // Bubble sort on index array based on product names
+        for (int i = 0; i < index.length - 1; i++) {
+            for (int j = 0; j < index.length - 1 - i; j++) {
+                // Compare names using index
+                if (pn[index[j]].compareToIgnoreCase(pn[index[j + 1]]) > 0) {
+                    // Swap indices only, not the actual data
+                    int temp = index[j];
+                    index[j] = index[j + 1];
+                    index[j + 1] = temp;
+                }
+            }
+        }
+        
+        // Display report using sorted indices
+        System.out.println("\n---------- SORTED BY NAME ----------");
+        productHeader();
+        
+        double totalSales = 0;
+        for (int i = 0; i < index.length; i++) {
+            int idx = index[i];
+            double extPrice = pp[idx] * pq[idx];
+            totalSales += extPrice;
+            productDetailLine(pn[idx], pp[idx], pq[idx], productCategory[idx], extPrice);
+        }
+        
+        productFooter(totalSales);
+    }
+    
+    // Requirement 10: Sort by price using bubble sort with index array
+    public static void sortByPriceReport() {
+        // Create index array
+        int[] index = new int[productPrice.length];
+        for (int i = 0; i < index.length; i++) {
+            index[i] = i;
+        }
+        
+        // Bubble sort on index array based on prices
+        for (int i = 0; i < index.length - 1; i++) {
+            for (int j = 0; j < index.length - 1 - i; j++) {
+                if (productPrice[index[j]] > productPrice[index[j + 1]]) {
+                    // Swap indices only, not the actual data
+                    int temp = index[j];
+                    index[j] = index[j + 1];
+                    index[j + 1] = temp;
+                }
+            }
+        }
+        
+        // Display report using sorted indices
+        System.out.println("\n---------- SORTED BY PRICE ----------");
+        productHeader();
+        
+        double totalSales = 0;
+        for (int i = 0; i < index.length; i++) {
+            int idx = index[i];
+            double extPrice = productPrice[idx] * productQuantity[idx];
+            totalSales += extPrice;
+            productDetailLine(productName[idx], productPrice[idx], 
+                            productQuantity[idx], productCategory[idx], extPrice);
+        }
+        
+        productFooter(totalSales);
+    }
+}
