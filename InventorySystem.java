@@ -112,3 +112,17 @@ public class InventorySystem {
         System.out.printf("Total Sales:   %42.2f%n", totalSales);
         System.out.println("----------------------------------------------------------");
     }
+        // Requirement 2: Calculate total sales
+    public static double findTotalSales(double[] pp, int[] pq) {
+        double total = 0;
+        for (int i = 0; i < pp.length; i++) {
+            total += pp[i] * pq[i];
+        }
+        return total;
+    }
+    
+    // Requirement 3: Calculate average sales per product
+    public static double findAverageSales(double[] pp, int[] pq) {
+        double total = findTotalSales(pp, pq);
+        return total / pp.length;
+    }
