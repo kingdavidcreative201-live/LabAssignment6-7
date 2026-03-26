@@ -126,3 +126,74 @@ public class InventorySystem {
         double total = findTotalSales(pp, pq);
         return total / pp.length;
     }
+        // Sub-menu for changing records
+    public static void changeRecordMenu() {
+        System.out.println("\n--- Change Record ---");
+        System.out.println("1. Change Quantity");
+        System.out.println("2. Change Price");
+        System.out.print("Enter choice: ");
+        int subChoice = scanner.nextInt();
+        scanner.nextLine();
+        
+        if (subChoice == 1) {
+            changeQuantity();
+        } else if (subChoice == 2) {
+            changePrice();
+        } else {
+            System.out.println("Invalid choice.");
+        }
+    }
+    
+    // Requirement 5: Change quantity function with linear search
+    public static void changeQuantity() {
+        System.out.print("Enter product name to search: ");
+        String searchName = scanner.nextLine();
+        
+        int foundIndex = -1;
+        for (int i = 0; i < productName.length; i++) {
+            if (productName[i].equalsIgnoreCase(searchName)) {
+                foundIndex = i;
+                break;
+            }
+        }
+        
+        if (foundIndex != -1) {
+            System.out.println("Found: " + productName[foundIndex] + 
+                             " | Current Quantity: " + productQuantity[foundIndex]);
+            System.out.print("Enter new quantity: ");
+            int newQty = scanner.nextInt();
+            scanner.nextLine();
+            
+            productQuantity[foundIndex] = newQty;
+            System.out.println("Quantity updated successfully!");
+        } else {
+            System.out.println("Product not found.");
+        }
+    }
+    
+    // Requirement 6: Change price function with linear search
+    public static void changePrice() {
+        System.out.print("Enter product name to search: ");
+        String searchName = scanner.nextLine();
+        
+        int foundIndex = -1;
+        for (int i = 0; i < productName.length; i++) {
+            if (productName[i].equalsIgnoreCase(searchName)) {
+                foundIndex = i;
+                break;
+            }
+        }
+        
+        if (foundIndex != -1) {
+            System.out.println("Found: " + productName[foundName] + 
+                             " | Current Price: $" + productPrice[foundIndex]);
+            System.out.print("Enter new price: ");
+            double newPrice = scanner.nextDouble();
+            scanner.nextLine();
+            
+            productPrice[foundIndex] = newPrice;
+            System.out.println("Price updated successfully!");
+        } else {
+            System.out.println("Product not found.");
+        }
+    }
