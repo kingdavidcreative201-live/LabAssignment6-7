@@ -185,7 +185,7 @@ public class InventorySystem {
         }
         
         if (foundIndex != -1) {
-            System.out.println("Found: " + productName[foundName] + 
+            System.out.println("Found: " + productName[foundIndex] + 
                              " | Current Price: $" + productPrice[foundIndex]);
             System.out.print("Enter new price: ");
             double newPrice = scanner.nextDouble();
