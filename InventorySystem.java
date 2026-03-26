@@ -25,3 +25,53 @@ public class InventorySystem {
     };
     
     static Scanner scanner = new Scanner(System.in);
+           
+       public static void main(String[] args) {
+        int choice;
+        
+        do {
+            System.out.println("\n========== INVENTORY MANAGEMENT SYSTEM ==========");
+            System.out.println("1. Display Full Report (Original Order)");
+            System.out.println("2. Display Report by Category");
+            System.out.println("3. Change Record (Quantity or Price)");
+            System.out.println("4. Sort by Name and Display Report");
+            System.out.println("5. Sort by Price and Display Report");
+            System.out.println("6. Display Products Below Max Price");
+            System.out.println("0. Exit");
+            System.out.print("Enter your choice: ");
+            
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Clear buffer
+            
+            switch (choice) {
+                case 1:
+                    displayReport(productName, productPrice, productQuantity, productCategory);
+                    break;
+                case 2:
+                    System.out.print("Enter category (F=Food, D=Dairy, M=Meat, P=Produce, B=Beverage, G=Grocery): ");
+                    char cat = scanner.nextLine().toUpperCase().charAt(0);
+                    categoryReport(cat);
+                    break;
+                case 3:
+                    changeRecordMenu();
+                    break;
+                case 4:
+                    sortByNameReport(productName, productPrice, productQuantity);
+                    break;
+                case 5:
+                    sortByPriceReport();
+                    break;
+                case 6:
+                    System.out.print("Enter maximum price: ");
+                    double maxPrice = scanner.nextDouble();
+                    scanner.nextLine();
+                    priceReport(maxPrice);
+                    break;
+                case 0:
+                    System.out.println("Thank you for using the Inventory System!");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 0);
+    }
