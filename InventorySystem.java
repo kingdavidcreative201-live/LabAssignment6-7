@@ -75,3 +75,40 @@ public class InventorySystem {
             }
         } while (choice != 0);
     }
+        // Requirement 1: Display full report with headers and footers
+    public static void displayReport(String[] pn, double[] pp, int[] pq, char[] pc) {
+        productHeader();
+        
+        double totalSales = 0;
+        
+        for (int i = 0; i < pn.length; i++) {
+            double extPrice = pp[i] * pq[i];
+            totalSales += extPrice;
+            productDetailLine(pn[i], pp[i], pq[i], pc[i], extPrice);
+        }
+        
+        productFooter(totalSales);
+    }
+    
+    // Requirement 4: Product detail line with formatted output
+    public static void productDetailLine(String name, double price, int qty, char category, double extPrice) {
+        System.out.printf("%-20s %10.2f %10d %10c %14.2f%n", 
+            name, price, qty, category, extPrice);
+    }
+    
+    // Requirement 4: Product header
+    public static void productHeader() {
+        System.out.println("\n-------------------- INVENTORY REPORT --------------------");
+        System.out.printf("%-20s %10s %10s %10s %14s%n", 
+            "Product Name", "Price", "Qty", "Category", "Ext. Price");
+        System.out.println("----------------------------------------------------------");
+    }
+    
+    // Requirement 4: Product footer with totals
+    public static void productFooter(double totalSales) {
+        System.out.println("----------------------------------------------------------");
+        double avgSales = findAverageSales(productPrice, productQuantity);
+        System.out.printf("Average Sales: %42.2f%n", avgSales);
+        System.out.printf("Total Sales:   %42.2f%n", totalSales);
+        System.out.println("----------------------------------------------------------");
+    }
