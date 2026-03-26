@@ -197,3 +197,56 @@ public class InventorySystem {
             System.out.println("Product not found.");
         }
     }
+        // Requirement 7: Category report - filters by category
+    public static void categoryReport(char c) {
+        System.out.println("\n---------- CATEGORY REPORT: " + c + " ----------");
+        productHeader();
+        
+        double catTotal = 0;
+        int count = 0;
+        
+        for (int i = 0; i < productCategory.length; i++) {
+            if (productCategory[i] == c) {
+                double extPrice = productPrice[i] * productQuantity[i];
+                catTotal += extPrice;
+                count++;
+                productDetailLine(productName[i], productPrice[i], 
+                                productQuantity[i], productCategory[i], extPrice);
+            }
+        }
+        
+        if (count == 0) {
+            System.out.println("No products found in category " + c);
+        } else {
+            System.out.println("----------------------------------------------------------");
+            System.out.printf("Products in category %c: %d%n", c, count);
+            System.out.printf("Category Total Sales: %29.2f%n", catTotal);
+        }
+    }
+    
+    // Requirement 8: Price report - products below max price
+    public static void priceReport(double p) {
+        System.out.printf("%n---------- PRODUCTS BELOW $%.2f ----------%n", p);
+        productHeader();
+        
+        double subTotal = 0;
+        int count = 0;
+        
+        for (int i = 0; i < productPrice.length; i++) {
+            if (productPrice[i] < p) {
+                double extPrice = productPrice[i] * productQuantity[i];
+                subTotal += extPrice;
+                count++;
+                productDetailLine(productName[i], productPrice[i], 
+                                productQuantity[i], productCategory[i], extPrice);
+            }
+        }
+        
+        if (count == 0) {
+            System.out.println("No products found below $" + p);
+        } else {
+            System.out.println("----------------------------------------------------------");
+            System.out.printf("Products below $%.2f: %d%n", p, count);
+            System.out.printf("Subtotal Sales: %35.2f%n", subTotal);
+        }
+    }
